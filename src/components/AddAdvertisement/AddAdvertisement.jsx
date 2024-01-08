@@ -1,13 +1,13 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
+import { useMapEvents } from 'react-leaflet';
 import { Formik, Form, Field } from 'formik';
 import { TextField } from 'formik-mui';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
-import PropTypes from 'prop-types';
 import * as yup from 'yup';
-import LocationContext from 'contexts/LocationContext';
+import AdvertisementContext from 'contexts/AdvertisementContext';
 
 const INITIAL_FORM_VALUES = {
   name: '',
@@ -19,12 +19,22 @@ const VALIDATION_SCHEMA = yup.object().shape({
   description: yup.string().required('Required'),
 });
 
-export default function Modal({ coordinates, isOpen, onClose }) {
-  const { handleAddItem } = useContext(LocationContext);
-  const handleSubmit = (values, { setSubmitting }) => {
+export default function AddAdvertisement() {
+  const { handleAddItem } = useContext(AdvertisementContext);
+
+  const [coordinates, setCoordinates] = useState(null);
+  const [isOpen, setIsOpen] = useState(false);
+  // eslint-disable-next-line no-unused-vars
+  const map = useMapEvents({
+    click(e) {
+      setIsOpen(true);
+      setCoordinates(e.latlng);
+    },
+  });
+
+  const handleSubmit = (values) => {
     handleAddItem({ coordinates, ...values });
-    setSubmitting(false);
-    onClose();
+    setIsOpen(false);
   };
 
   return (
@@ -46,6 +56,8 @@ export default function Modal({ coordinates, isOpen, onClose }) {
                 component={TextField}
                 label='Опис'
                 name='description'
+                multiline
+                rows={4}
               />
               <Button
                 type='submit'
@@ -59,16 +71,3 @@ export default function Modal({ coordinates, isOpen, onClose }) {
     </Dialog>
   );
 }
-
-Modal.defaultProps = {
-  coordinates: null,
-};
-
-Modal.propTypes = {
-  coordinates: PropTypes.shape({
-    lat: PropTypes.number,
-    lng: PropTypes.number,
-  }),
-  isOpen: PropTypes.bool.isRequired,
-  onClose: PropTypes.func.isRequired,
-};
