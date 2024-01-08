@@ -1,13 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import LocationProvider from 'components/LocationProvider';
-import App from './App';
-import './index.css';
+import CssBaseline from '@mui/material/CssBaseline';
+import AdvertisementProvider from 'components/AdvertisementProvider';
+import Map from 'components/Map';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <LocationProvider>
-      <App />
-    </LocationProvider>
+    <CssBaseline />
+    <AdvertisementProvider>
+      <Map />
+    </AdvertisementProvider>
   </React.StrictMode>,
 );
