@@ -1,60 +1,52 @@
 import { useContext, useState } from 'react';
-import {
-  Marker,
-  MapContainer,
-  Popup,
-  TileLayer,
-  useMapEvents,
-} from 'react-leaflet';
-import LocationContext from 'contexts/LocationContext';
-import Modal from 'components/Modal';
+import { MapContainer, TileLayer } from 'react-leaflet';
+import AddAdvertisement from 'components/AddAdvertisement';
+import AdvertisementList from 'components/AdvertisementList';
+import SelectedAdvertisement from 'components/SelectedAdvertisement';
+import Marker from 'components/Marker';
+import PanelContainer from 'components/PanelContainer';
+import AdvertisementContext from 'contexts/AdvertisementContext';
+import 'leaflet/dist/leaflet.css';
+import * as classes from './styles';
 
-function LocationMarker() {
-  const [coord, setCoords] = useState(null);
-  const [isOpen, setIsOpen] = useState(false);
-  // eslint-disable-next-line no-unused-vars
-  const map = useMapEvents({
-    click(e) {
-      setIsOpen(true);
-      setCoords(e.latlng);
-    },
-  });
-
-  return (
-    <Modal
-      coordinates={coord}
-      isOpen={isOpen}
-      onClose={() => setIsOpen(false)}
-    />
-  );
-}
+const DEFAULT_ZOOM = 6;
+const INITIAL_COORDINATES = [49.0, 32.0];
 
 export default function Map() {
-  const { items } = useContext(LocationContext);
+  const { items } = useContext(AdvertisementContext);
+  const [selectedMarkerCoords, setSelectedMarkerCoords] = useState(null);
 
   return (
     <MapContainer
-      center={[51.505, -0.09]}
-      zoom={13}
-      scrollWheelZoom={false}
-      style={{ height: '500px', width: '500px' }}>
+      center={INITIAL_COORDINATES}
+      css={classes.map}
+      zoom={DEFAULT_ZOOM}>
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
       />
       {items.map((item) => (
         <Marker
-          key={item.coordinates}
-          position={[item.coordinates.lat, item.coordinates.lng]}>
-          <Popup>
-            <div>
-              <span>Назва: {item.name}</span>
-              <span>Опис: {item.description}</span>
-            </div>
-          </Popup>
-        </Marker>
+          key={`${item.coordinates.lat}-${item.coordinates.lng}`}
+          coordinates={item.coordinates}
+          name={item.name}
+          onClick={(coordinates) => {
+            setSelectedMarkerCoords(coordinates);
+          }}
+        />
       ))}
-      <LocationMarker />
+      <AddAdvertisement />
+      <div css={classes.panelWrap}>
+        <PanelContainer>
+          {selectedMarkerCoords ? (
+            <SelectedAdvertisement
+              selectedMarkerCoords={selectedMarkerCoords}
+            />
+          ) : (
+            <AdvertisementList />
+          )}
+        </PanelContainer>
+      </div>
     </MapContainer>
   );
 }
