@@ -4,10 +4,17 @@ import eslint from 'vite-plugin-eslint';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react(), eslint()],
+  plugins: [
+    react({
+      jsxImportSource: '@emotion/react',
+      babel: {
+        plugins: ['@emotion/babel-plugin'],
+      },
+    }),
+    eslint(),
+  ],
   resolve: {
     alias: {
-      assets: '/src/assets',
       components: '/src/components',
       constants: '/src/constants',
       contexts: '/src/contexts',
