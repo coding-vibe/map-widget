@@ -4,6 +4,7 @@ import eslint from 'vite-plugin-eslint';
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  base: '/map-widget/',
   plugins: [
     react({
       jsxImportSource: '@emotion/react',
