@@ -7,16 +7,19 @@ import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import * as yup from 'yup';
+import ImageField from 'components/ImageField';
 import AdvertisementContext from 'contexts/AdvertisementContext';
 
 const INITIAL_FORM_VALUES = {
   name: '',
   description: '',
+  image: '',
 };
 
 const VALIDATION_SCHEMA = yup.object().shape({
-  name: yup.string().required('Required'),
-  description: yup.string().required('Required'),
+  name: yup.string().required("Обов'язкове поле"),
+  description: yup.string().required("Обов'язкове поле"),
+  image: yup.string().required("Обов'язкове поле"),
 });
 
 export default function AddAdvertisement() {
@@ -58,6 +61,11 @@ export default function AddAdvertisement() {
                 name='description'
                 multiline
                 rows={4}
+              />
+              <Field
+                component={ImageField}
+                label='Зображення'
+                name='image'
               />
               <Button
                 type='submit'

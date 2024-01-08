@@ -1,8 +1,11 @@
+import { Buffer } from 'buffer';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import CssBaseline from '@mui/material/CssBaseline';
 import AdvertisementProvider from 'components/AdvertisementProvider';
 import Map from 'components/Map';
+
+window.Buffer = window.Buffer || Buffer;
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
