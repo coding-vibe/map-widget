@@ -1,6 +1,7 @@
 import { useMemo } from 'react';
 import L from 'leaflet';
 import { Marker as LeafletMarker, Popup } from 'react-leaflet';
+import PropTypes from 'prop-types';
 
 const markerIcon = L.icon({
   iconUrl: './house.png',
@@ -9,7 +10,6 @@ const markerIcon = L.icon({
   popupAnchor: [0, -38],
 });
 
-// eslint-disable-next-line react/prop-types
 export default function Marker({ coordinates, name, onClick }) {
   const eventHandlers = useMemo(
     () => ({
@@ -25,10 +25,18 @@ export default function Marker({ coordinates, name, onClick }) {
   return (
     <LeafletMarker
       icon={markerIcon}
-      // eslint-disable-next-line react/prop-types
       position={[coordinates.lat, coordinates.lng]}
       eventHandlers={eventHandlers}>
       <Popup>{name}</Popup>
     </LeafletMarker>
   );
 }
+
+Marker.propTypes = {
+  coordinates: PropTypes.shape({
+    lat: PropTypes.number.isRequired,
+    lng: PropTypes.number.isRequired,
+  }).isRequired,
+  name: PropTypes.string.isRequired,
+  onClick: PropTypes.func.isRequired,
+};
