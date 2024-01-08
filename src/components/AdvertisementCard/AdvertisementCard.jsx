@@ -6,7 +6,7 @@ import { CardActionArea } from '@mui/material';
 import PropTypes from 'prop-types';
 
 export default function AdvertisementCard({ advertisement, className }) {
-  const { coordinates, name, description } = advertisement;
+  const { coordinates, name, description, image } = advertisement;
 
   return (
     <Card
@@ -17,7 +17,7 @@ export default function AdvertisementCard({ advertisement, className }) {
         <CardMedia
           component='img'
           height='140'
-          image='/static/images/cards/contemplative-reptile.jpg'
+          image={image}
           alt={name}
         />
         <CardContent>
@@ -50,6 +50,7 @@ AdvertisementCard.propTypes = {
     }).isRequired,
     name: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
+    image: PropTypes.string.isRequired,
   }).isRequired,
   className: PropTypes.string,
 };
