@@ -9,8 +9,8 @@ import AdvertisementContext from 'contexts/AdvertisementContext';
 import 'leaflet/dist/leaflet.css';
 import * as classes from './styles';
 
-const DEFAULT_ZOOM = 6;
-const INITIAL_COORDINATES = [49.0, 32.0];
+const DEFAULT_ZOOM = 10;
+const INITIAL_COORDINATES = [50.4504, 30.5245];
 
 export default function Map() {
   const { items } = useContext(AdvertisementContext);

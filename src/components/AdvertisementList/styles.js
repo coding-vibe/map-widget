@@ -7,3 +7,7 @@ export const listWrap = css`
   align-items: center;
   gap: 20px;
 `;
+
+export const title = css`
+  text-align: center;
+`;

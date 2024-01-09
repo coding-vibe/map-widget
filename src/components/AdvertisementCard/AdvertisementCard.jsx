@@ -4,20 +4,18 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import PropTypes from 'prop-types';
+import * as classes from './styles';
 
 export default function AdvertisementCard({ advertisement, className }) {
-  const { coordinates, name, description, image } = advertisement;
+  const { name, description, image } = advertisement;
 
   return (
-    <Card
-      className={className}
-      key={coordinates}
-      sx={{ maxWidth: 345 }}>
+    <Card className={className}>
       <CardActionArea>
         <CardMedia
           alt={name}
           component='img'
-          height='140'
+          css={classes.cardMedia}
           image={image}
         />
         <CardContent>
@@ -44,10 +42,6 @@ AdvertisementCard.defaultProps = {
 
 AdvertisementCard.propTypes = {
   advertisement: PropTypes.shape({
-    coordinates: PropTypes.shape({
-      lat: PropTypes.number.isRequired,
-      lng: PropTypes.number.isRequired,
-    }).isRequired,
     name: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
     image: PropTypes.string.isRequired,

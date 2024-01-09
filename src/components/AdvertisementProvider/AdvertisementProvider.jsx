@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
 import AdvertisementContext from 'contexts/AdvertisementContext';
-import advertisements from './advertisements';
+import fixture from 'constants/fixture';
 
 export default function AdvertisementProvider({ children }) {
-  const [items, setItems] = useState(advertisements);
+  const [items, setItems] = useState(fixture);
 
   const handleAddItem = (newItem) => {
     setItems((prevState) => [...prevState, newItem]);

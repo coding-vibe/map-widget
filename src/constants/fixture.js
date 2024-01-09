@@ -1,4 +1,4 @@
-const advertisements = [
+const fixture = [
   {
     coordinates: {
       lat: 50.44642362388236,
@@ -56,4 +56,4 @@ const advertisements = [
   },
 ];
 
-export default advertisements;
+export default fixture;

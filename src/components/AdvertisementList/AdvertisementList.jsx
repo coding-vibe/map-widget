@@ -27,7 +27,7 @@ export default function AdvertisementList() {
     <div css={classes.listWrap}>
       <Typography
         component='h2'
-        css={{ textAlign: 'center' }}
+        css={classes.title}
         variant='h4'>
         Знайдено {displayedAdvertisements.length} оголошень
       </Typography>

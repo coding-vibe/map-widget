@@ -18,6 +18,7 @@ export default defineConfig({
     alias: {
       components: '/src/components',
       constants: '/src/constants',
+      config: '/src/config',
       contexts: '/src/contexts',
     },
   },

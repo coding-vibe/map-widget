@@ -1,4 +1,3 @@
-// eslint-disable-next-line no-unused-vars
 import { css } from '@emotion/react';
 
 export const cardWrap = css`
