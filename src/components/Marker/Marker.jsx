@@ -4,7 +4,7 @@ import L from 'leaflet';
 import PropTypes from 'prop-types';
 
 const markerIcon = L.icon({
-  iconUrl: './public/house_icon.png',
+  iconUrl: './house_icon.png',
   iconSize: [38, 38],
   iconAnchor: [19, 38],
   popupAnchor: [0, -38],

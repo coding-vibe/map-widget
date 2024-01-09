@@ -11,7 +11,7 @@ export default function AdvertisementCard({ advertisement, className }) {
 
   return (
     <Card className={className}>
-      <CardActionArea>
+      <CardActionArea css={classes.cardArea}>
         <CardMedia
           alt={name}
           component='img'

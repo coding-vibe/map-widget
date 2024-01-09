@@ -9,6 +9,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import * as yup from 'yup';
 import ImageField from 'components/ImageField';
 import AdvertisementContext from 'contexts/AdvertisementContext';
+import * as classes from './styles';
 
 const INITIAL_FORM_VALUES = {
   name: '',
@@ -40,41 +41,47 @@ export default function AddAdvertisement() {
   };
 
   return (
-    <Dialog open={isOpen}>
-      <DialogTitle>Подати оголошення</DialogTitle>
-      <DialogContent>
-        <Formik
-          initialValues={INITIAL_FORM_VALUES}
-          onSubmit={handleSubmit}
-          validationSchema={VALIDATION_SCHEMA}>
-          {() => (
-            <Form>
-              <Field
-                component={TextField}
-                label='Назва'
-                name='name'
-              />
-              <Field
-                component={TextField}
-                label='Опис'
-                name='description'
-                multiline
-                rows={4}
-              />
-              <Field
-                component={ImageField}
-                label='Зображення'
-                name='image'
-              />
-              <Button
-                type='submit'
-                variant='contained'>
-                Відправити
-              </Button>
-            </Form>
-          )}
-        </Formik>
-      </DialogContent>
+    <Dialog
+      open={isOpen}
+      onClose={() => {
+        setIsOpen(false);
+      }}>
+      <div css={classes.modal}>
+        <DialogTitle css={classes.title}>Подати оголошення</DialogTitle>
+        <DialogContent>
+          <Formik
+            initialValues={INITIAL_FORM_VALUES}
+            onSubmit={handleSubmit}
+            validationSchema={VALIDATION_SCHEMA}>
+            {() => (
+              <Form css={classes.form}>
+                <Field
+                  component={TextField}
+                  label='Назва'
+                  name='name'
+                />
+                <Field
+                  component={TextField}
+                  label='Опис'
+                  name='description'
+                  multiline
+                  rows={4}
+                />
+                <Field
+                  component={ImageField}
+                  label='*Прикріпити зображення'
+                  name='image'
+                />
+                <Button
+                  type='submit'
+                  variant='contained'>
+                  Відправити
+                </Button>
+              </Form>
+            )}
+          </Formik>
+        </DialogContent>
+      </div>
     </Dialog>
   );
 }

@@ -4,6 +4,7 @@ import FormHelperText from '@mui/material/FormHelperText';
 import FormLabel from '@mui/material/FormLabel';
 import PropTypes from 'prop-types';
 import awsConfig from 'config/awsConfig';
+import * as classes from './styles';
 
 const ReactS3Client = new S3(awsConfig);
 
@@ -30,10 +31,11 @@ export default function ImageField({ field, form, label }) {
       <Button onClick={() => setFieldValue(name, '')}>Відмінити</Button>
     </>
   ) : (
-    <FormLabel>
-      {label}
+    <FormLabel css={classes.field}>
+      <span css={classes.label}>{label}</span>
       <input
         accept='image/jpg, image/jpeg, image/png, image/webp'
+        css={classes.input}
         name='advertisement-image'
         onChange={handleFileUpload}
         type='file'

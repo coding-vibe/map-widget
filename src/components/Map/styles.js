@@ -13,4 +13,5 @@ export const panelContainer = css`
   overflow-y: auto;
   padding: 20px;
   background-color: #f2f4f5;
+  cursor: default;
 `;
