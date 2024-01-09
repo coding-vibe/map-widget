@@ -1,11 +1,7 @@
 import { css } from '@emotion/react';
 
 export const field = css`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
+  margin: 0 auto;
 `;
 
 export const input = css`

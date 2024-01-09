@@ -5,14 +5,12 @@ export const modal = css`
 `;
 
 export const title = css`
-  font-size: 26px;
   text-align: center;
+  font-size: 26px;
 `;
 
 export const form = css`
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
   gap: 30px;
 `;

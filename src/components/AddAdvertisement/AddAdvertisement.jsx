@@ -69,7 +69,7 @@ export default function AddAdvertisement() {
                 />
                 <Field
                   component={ImageField}
-                  label='*Прикріпити зображення'
+                  label='Прикріпити зображення'
                   name='image'
                 />
                 <Button
