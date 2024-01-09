@@ -14,7 +14,6 @@ const INITIAL_COORDINATES = [50.4504, 30.5245];
 
 export default function Map() {
   const { items } = useContext(AdvertisementContext);
-  const [showAdvertisementList, setShowAdvertisementList] = useState(false);
   const [selectedMarkerCoords, setSelectedMarkerCoords] = useState(null);
 
   return (
@@ -28,7 +27,6 @@ export default function Map() {
       />
       {items.map((item) => (
         <Marker
-          closeAdvertisementList={() => setShowAdvertisementList(false)}
           coordinates={item.coordinates}
           key={`${item.coordinates.lat}-${item.coordinates.lng}`}
           name={item.name}
@@ -38,19 +36,16 @@ export default function Map() {
         />
       ))}
       <AddAdvertisement />
-      <div css={classes.panelWrap}>
-        <PanelContainer>
-          {!showAdvertisementList && selectedMarkerCoords ? (
-            <SelectedAdvertisement
-              openAdvertisementList={() => setShowAdvertisementList(true)}
-              selectedMarkerCoords={selectedMarkerCoords}
-              showAdvertisementList={showAdvertisementList}
-            />
-          ) : (
-            <AdvertisementList />
-          )}
-        </PanelContainer>
-      </div>
+      <PanelContainer css={classes.panelContainer}>
+        {selectedMarkerCoords ? (
+          <SelectedAdvertisement
+            onClose={() => setSelectedMarkerCoords(null)}
+            selectedMarkerCoords={selectedMarkerCoords}
+          />
+        ) : (
+          <AdvertisementList />
+        )}
+      </PanelContainer>
     </MapContainer>
   );
 }

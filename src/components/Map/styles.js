@@ -5,7 +5,7 @@ export const map = css`
   height: 100vh;
 `;
 
-export const panelWrap = css`
+export const panelContainer = css`
   position: fixed;
   right: 0%;
   width: 30%;

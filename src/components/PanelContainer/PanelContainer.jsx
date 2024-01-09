@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react';
 import L from 'leaflet';
 import PropTypes from 'prop-types';
 
-export default function PanelContainer({ children }) {
+function PanelContainer({ children, className }) {
   const ref = useRef();
 
   useEffect(() => {
@@ -12,9 +12,22 @@ export default function PanelContainer({ children }) {
     }
   });
 
-  return <div ref={ref}>{children}</div>;
+  return (
+    <div
+      className={className}
+      ref={ref}>
+      {children}
+    </div>
+  );
 }
+
+PanelContainer.defaultProps = {
+  className: null,
+};
 
 PanelContainer.propTypes = {
   children: PropTypes.node.isRequired,
+  className: PropTypes.string,
 };
+
+export default PanelContainer;
