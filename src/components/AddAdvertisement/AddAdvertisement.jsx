@@ -24,11 +24,10 @@ const VALIDATION_SCHEMA = yup.object().shape({
 
 export default function AddAdvertisement() {
   const { handleAddItem } = useContext(AdvertisementContext);
-
   const [coordinates, setCoordinates] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
-  // eslint-disable-next-line no-unused-vars
-  const map = useMapEvents({
+
+  useMapEvents({
     click(e) {
       setIsOpen(true);
       setCoordinates(e.latlng);

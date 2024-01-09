@@ -1,8 +1,8 @@
 import { useContext, useMemo, useState } from 'react';
 import { useMapEvents } from 'react-leaflet';
+import Typography from '@mui/material/Typography';
 import AdvertisementCard from 'components/AdvertisementCard';
 import AdvertisementContext from 'contexts/AdvertisementContext';
-import { Typography } from '@mui/material';
 import * as classes from './styles';
 
 export default function AdvertisementList() {
@@ -38,8 +38,8 @@ export default function AdvertisementList() {
       </Typography>
       {displayedAdvertisements.map((ad) => (
         <AdvertisementCard
-          key={`${ad.coordinates.lat}-${ad.coordinates.lng}`}
           advertisement={ad}
+          key={`${ad.coordinates.lat}-${ad.coordinates.lng}`}
         />
       ))}
     </div>

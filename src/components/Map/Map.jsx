@@ -2,9 +2,9 @@ import { useContext, useState } from 'react';
 import { MapContainer, TileLayer } from 'react-leaflet';
 import AddAdvertisement from 'components/AddAdvertisement';
 import AdvertisementList from 'components/AdvertisementList';
-import SelectedAdvertisement from 'components/SelectedAdvertisement';
 import Marker from 'components/Marker';
 import PanelContainer from 'components/PanelContainer';
+import SelectedAdvertisement from 'components/SelectedAdvertisement';
 import AdvertisementContext from 'contexts/AdvertisementContext';
 import 'leaflet/dist/leaflet.css';
 import * as classes from './styles';
@@ -14,6 +14,7 @@ const INITIAL_COORDINATES = [49.0, 32.0];
 
 export default function Map() {
   const { items } = useContext(AdvertisementContext);
+  const [showAdvertisementList, setShowAdvertisementList] = useState(false);
   const [selectedMarkerCoords, setSelectedMarkerCoords] = useState(null);
 
   return (
@@ -27,8 +28,9 @@ export default function Map() {
       />
       {items.map((item) => (
         <Marker
-          key={`${item.coordinates.lat}-${item.coordinates.lng}`}
+          closeAdvertisementList={() => setShowAdvertisementList(false)}
           coordinates={item.coordinates}
+          key={`${item.coordinates.lat}-${item.coordinates.lng}`}
           name={item.name}
           onClick={(coordinates) => {
             setSelectedMarkerCoords(coordinates);
@@ -38,9 +40,11 @@ export default function Map() {
       <AddAdvertisement />
       <div css={classes.panelWrap}>
         <PanelContainer>
-          {selectedMarkerCoords ? (
+          {!showAdvertisementList && selectedMarkerCoords ? (
             <SelectedAdvertisement
+              openAdvertisementList={() => setShowAdvertisementList(true)}
               selectedMarkerCoords={selectedMarkerCoords}
+              showAdvertisementList={showAdvertisementList}
             />
           ) : (
             <AdvertisementList />

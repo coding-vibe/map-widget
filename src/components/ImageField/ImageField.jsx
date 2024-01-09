@@ -16,26 +16,26 @@ const config = {
 const ReactS3Client = new S3(config);
 
 export default function ImageField({ field, form, label }) {
+  const { name, value } = field;
+  const { getFieldMeta, setFieldValue } = form;
+  const meta = getFieldMeta(name);
+  const error = meta?.touched && !!meta?.error ? meta.error : '';
+
   const handleFileUpload = (e) => {
     const [image] = e.target.files;
     // TODO: Add error handler
     ReactS3Client.uploadFile(image).then((data) =>
-      form.setFieldValue(field.name, data.location),
+      setFieldValue(name, data.location),
     );
   };
 
-  const meta = form.getFieldMeta(field.name);
-  const error = meta?.touched && !!meta?.error ? meta.error : '';
-
-  return field.value ? (
+  return value ? (
     <>
       <img
-        src={field.value}
-        alt={`${field.name}-preview `}
+        alt={`${name}-preview `}
+        src={value}
       />
-      <Button onClick={() => form.setFieldValue(field.name, '')}>
-        Відмінити
-      </Button>
+      <Button onClick={() => setFieldValue(name, '')}>Відмінити</Button>
     </>
   ) : (
     <FormLabel>

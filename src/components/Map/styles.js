@@ -11,4 +11,6 @@ export const panelWrap = css`
   width: 30%;
   height: 100vh;
   overflow-y: auto;
+  padding: 20px;
+  background-color: #f2f4f5;
 `;

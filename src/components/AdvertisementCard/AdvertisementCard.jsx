@@ -1,8 +1,8 @@
 import Card from '@mui/material/Card';
+import CardActionArea from '@mui/material/CardActionArea';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
-import { CardActionArea } from '@mui/material';
 import PropTypes from 'prop-types';
 
 export default function AdvertisementCard({ advertisement, className }) {
@@ -15,21 +15,21 @@ export default function AdvertisementCard({ advertisement, className }) {
       sx={{ maxWidth: 345 }}>
       <CardActionArea>
         <CardMedia
+          alt={name}
           component='img'
           height='140'
           image={image}
-          alt={name}
         />
         <CardContent>
           <Typography
+            component='div'
             gutterBottom
-            variant='h5'
-            component='div'>
+            variant='h5'>
             {name}
           </Typography>
           <Typography
-            variant='body2'
-            color='text.secondary'>
+            color='text.secondary'
+            variant='body2'>
             {description}
           </Typography>
         </CardContent>
