@@ -5,6 +5,6 @@ export const cardArea = css`
 `;
 
 export const cardMedia = css`
-  max-width: 345px;
+  width: 100%;
   height: 140px;
 `;
