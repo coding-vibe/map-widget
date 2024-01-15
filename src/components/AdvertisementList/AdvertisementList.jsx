@@ -18,7 +18,9 @@ export default function AdvertisementList() {
     () =>
       items.filter(({ coordinates }) =>
         //  map.getBounds() is used for the calculation of map bounds on the first render, because 'load' event doesn't fire properly
-        bounds ? bounds.contains(coordinates) : map.getBounds(),
+        bounds
+          ? bounds.contains(coordinates)
+          : map.getBounds().contains(coordinates),
       ),
     [items, bounds, map],
   );
