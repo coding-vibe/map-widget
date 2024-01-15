@@ -7,8 +7,6 @@ import AdvertisementContext from 'contexts/AdvertisementContext';
 import * as classes from './styles';
 
 export default function AdvertisementList({ bounds, setBounds }) {
-  console.log(bounds);
-
   const { items } = useContext(AdvertisementContext);
   const map = useMapEvents({
     moveend() {
