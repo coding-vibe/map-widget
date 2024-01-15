@@ -1,13 +1,13 @@
-import { useContext, useMemo } from 'react';
+import { useContext, useMemo, useState } from 'react';
 import { useMapEvents } from 'react-leaflet';
 import Typography from '@mui/material/Typography';
-import PropTypes from 'prop-types';
 import AdvertisementCard from 'components/AdvertisementCard';
 import AdvertisementContext from 'contexts/AdvertisementContext';
 import * as classes from './styles';
 
-export default function AdvertisementList({ bounds, setBounds }) {
+export default function AdvertisementList() {
   const { items } = useContext(AdvertisementContext);
+  const [bounds, setBounds] = useState(null);
   const map = useMapEvents({
     moveend() {
       setBounds(map.getBounds());
@@ -45,17 +45,3 @@ export default function AdvertisementList({ bounds, setBounds }) {
     </div>
   );
 }
-
-AdvertisementList.defaultProps = {
-  bounds: null,
-};
-
-AdvertisementList.propTypes = {
-  bounds: PropTypes.objectOf(
-    PropTypes.shape({
-      lat: PropTypes.number.isRequired,
-      lng: PropTypes.number.isRequired,
-    }),
-  ),
-  setBounds: PropTypes.func.isRequired,
-};
