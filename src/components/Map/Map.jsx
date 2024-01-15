@@ -10,11 +10,12 @@ import 'leaflet/dist/leaflet.css';
 import * as classes from './styles';
 
 const DEFAULT_ZOOM = 10;
-const INITIAL_COORDINATES = [50.4504, 30.5245];
+const INITIAL_COORDINATES = [50.49597839781553, 30.52340935022772];
 
 export default function Map() {
   const { items } = useContext(AdvertisementContext);
   const [selectedMarkerCoords, setSelectedMarkerCoords] = useState(null);
+  const [bounds, setBounds] = useState(null);
 
   return (
     <MapContainer
@@ -43,7 +44,10 @@ export default function Map() {
             selectedMarkerCoords={selectedMarkerCoords}
           />
         ) : (
-          <AdvertisementList />
+          <AdvertisementList
+            bounds={bounds}
+            setBounds={setBounds}
+          />
         )}
       </PanelContainer>
     </MapContainer>
