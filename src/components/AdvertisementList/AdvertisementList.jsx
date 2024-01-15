@@ -20,7 +20,6 @@ export default function AdvertisementList({ bounds, setBounds }) {
     () =>
       items.filter(({ coordinates }) =>
         //  map.getBounds() is used for the calculation of map bounds on the first render, because 'load' event doesn't fire properly
-        // eslint-disable-next-line react/prop-types
         bounds ? bounds.contains(coordinates) : map.getBounds(),
       ),
     [items, bounds, map],
@@ -49,16 +48,16 @@ export default function AdvertisementList({ bounds, setBounds }) {
   );
 }
 
+AdvertisementList.defaultProps = {
+  bounds: null,
+};
+
 AdvertisementList.propTypes = {
-  bounds: PropTypes.shape({
-    _northEast: {
+  bounds: PropTypes.objectOf(
+    PropTypes.shape({
       lat: PropTypes.number.isRequired,
       lng: PropTypes.number.isRequired,
-    },
-    _southWest: {
-      lat: PropTypes.number.isRequired,
-      lng: PropTypes.number.isRequired,
-    },
-  }).isRequired,
+    }),
+  ),
   setBounds: PropTypes.func.isRequired,
 };
